@@ -1,0 +1,40 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <span class="titulo">CREAR PRODUCTO</span>
+                    <form class="mt-1" [formGroup]="ownerForm" (ngSubmit)="addOwner()">
+                        <div class="mb-1">
+                            <input type="number" formControlName="dni" class="form-control" placeholder="DNI" >
+                            <div class="text-danger"
+                                *ngIf="ownerForm.get('dni')?.hasError('required') && ownerForm.get('dni')?.touched">
+                                El DNI es obligatorio.
+                            </div>
+                        </div>
+                        <div class="mb-1">
+                            <input type="text" formControlName="profesion" class="form-control" placeholder="Profesión" required>
+                            <div class="text-danger"
+                                *ngIf="ownerForm.get('profesion')?.hasError('required') && ownerForm.get('profesion')?.touched">
+                                La profesión es obligatoria.
+                            </div>
+                        </div>
+                        <div class="mb-1">
+                            <input type="text" formControlName="nombre" class="form-control" placeholder="Nombre" required>
+                            <div class="text-danger"
+                                *ngIf="ownerForm.get('nombre')?.hasError('required') && ownerForm.get('nombre')?.touched">
+                                El nombre es obligatorio.
+                            </div>
+                        </div>
+                        <div class="">
+                            <button routerLink="/owner-list " class="btn btn-secondary btn-lg float-start">VOLVER</button>
+                            <button type="submit" [disabled]="ownerForm.invalid" class="btn btn-success btn-lg float-end">ACEPTAR</button>
+
+                        </div>
+
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,13 +10,17 @@ import { CarListComponent } from './car-list/car-list.component';
 import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarEditComponent } from './car-edit/car-edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OwnerAddComponent } from './owner-add/owner-add.component';
+import { OwnerListComponent } from './owner-list/owner-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CarListComponent,
-    CarEditComponent
+    CarEditComponent,
+    OwnerAddComponent,
+    OwnerListComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,8 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     MatListModule,
     MatToolbarModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
