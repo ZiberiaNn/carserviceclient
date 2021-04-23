@@ -26,7 +26,7 @@ const routes: Routes = [
     path: 'owner-add', component: OwnerAddComponent
   },
   {
-    path: 'owner-edit/:id', component: OwnerAddComponent
+    path: 'owner-edit/:href', component: OwnerAddComponent
   }
 ];
 

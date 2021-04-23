@@ -16,29 +16,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td><i class="fas fa-trash-alt"></i>
-                                    <i class="fas fa-user-edit"></i>
+                            <tr *ngFor="let owner of owners">
+                                <th scope="row">{{owner.dni}}</th>
+                                <td>{{owner.profession}}</td>
+                                <td>{{owner.name}}</td>
+                                <td><i class="fas fa-trash-alt" (click)="remove(owner._links.owner.href)"></i>
+                                    <i class="fas fa-user-edit" [routerLink]="['/owner-edit', owner._links.owner.href]"></i>
                                 </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td><i class="fas fa-trash-alt"></i>
-                                    <i class="fas fa-user-edit"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td><i class="fas fa-trash-alt"></i>
-                                    <i class="fas fa-user-edit"></i>
-                                </td>
-                            </tr>
+                            </tr>                    
                         </tbody>
                     </table>
 
