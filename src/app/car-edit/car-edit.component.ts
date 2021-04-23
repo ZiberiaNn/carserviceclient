@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CarService } from '../shared/car/car.service';
 import { GiphyService } from '../shared/giphy/giphy.service';
 import { NgForm } from '@angular/forms';
+import { OwnerService } from '../shared/owner/owner.service';
 
 @Component({
   selector: 'app-car-edit',
@@ -16,9 +17,10 @@ export class CarEditComponent implements OnInit, OnDestroy {
   sub: Subscription;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private carService: CarService,
-              private giphyService: GiphyService) {
+    private router: Router,
+    private carService: CarService,
+    private giphyService: GiphyService,
+    private ownerService: OwnerService) {
   }
 
   ngOnInit() {
@@ -46,12 +48,19 @@ export class CarEditComponent implements OnInit, OnDestroy {
   gotoList() {
     this.router.navigate(['/car-list']);
   }
-  
+
   save(form: NgForm) {
-    this.carService.save(form).subscribe(result => {
+    this.ownerService.getUser(form['ownerDni']).subscribe(data => {
+      form['ownerDni'] = data['dni'];
+      console.log(form);
+      this.carService.save(form).subscribe(result => {
+        this.gotoList();
+      }, error => console.error(error));
+    });
+  }
+  remove(href) {
+    this.carService.remove(href).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }
-
 }
-

@@ -16,6 +16,9 @@ export class OwnerService {
     return this.http.get(this.OWNER_API);
   }
   
+  getUser(id:string){
+    return this.http.get(this.OWNER_API + '/' + id);
+  }
   get(href: string) {
     return this.http.get(href);
   }

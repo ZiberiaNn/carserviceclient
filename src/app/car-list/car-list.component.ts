@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CarService } from '../shared/car/car.service';
 import { GiphyService } from '../shared/giphy/giphy.service';
-import { OwnerService } from '../shared/owner/owner.service';
 
 @Component({
   selector: 'app-car-list',
@@ -10,20 +9,27 @@ import { OwnerService } from '../shared/owner/owner.service';
 })
 export class CarListComponent implements OnInit {
   cars: Array<any>;
-  owners: Array<any>;
 
-  constructor(private carService: CarService, private giphyService: GiphyService, private ownerService: OwnerService) { }
+  constructor(private carService: CarService, private giphyService: GiphyService) { }
 
   ngOnInit() {
     this.carService.getAll().subscribe(data => {
-      this.cars = data;
+      this.cars = data._embedded.cars;  
+      this.getId(this.cars);
+      console.log(this.cars);
       for (const car of this.cars) {
         this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
       }
+      
     });
-    this.ownerService.getAll().subscribe(data => {
-      this.owners = data._embedded.owners;
-      console.log(this.owners);
-    });
+  }
+  getId(list){
+    let longitud=list.length;
+    for(let i=0;i<longitud;i++)
+    {
+        let array=list[i]._links.car.href;
+        let partes = array.split('/');
+        list[i]._links.self.href=partes[partes.length-1];
+    }
   }
 }
